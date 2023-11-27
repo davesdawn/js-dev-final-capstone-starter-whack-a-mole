@@ -2,8 +2,11 @@ const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
 const startButton = document.querySelector('#start');
 // TODO: Add the missing query selectors:
-const score; // Use querySelector() to get the score element
-const timerDisplay; // use querySelector() to get the timer element.
+// Use querySelector() to get the score element
+const score = document.querySelector('#score');
+
+// use querySelector() to get the timer element.
+const timerDisplay = document.querySelector('#timer'); 
 
 let time = 0;
 let timer;
@@ -21,7 +24,8 @@ let difficulty = "hard";
  *
  */
 function randomInteger(min, max) {
-  // return Math.floor(Math.random() * (max - min + 1)) + min;
+  //Using randomInteger() to generate a random integer within a range
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /**
@@ -41,6 +45,13 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   // TODO: Write your code here.
+  if (difficulty === "easy") {
+    return 1500;  //setDelay("easy") //> returns 1500
+  } else if (difficulty === "normal") {
+    return 1000; //setDelay("normal") //> returns 1000
+  } else if (difficulty === "hard") {
+    return  Math.floor(Math.random() * (1200 - 600 + 1)) + 600; //setDelay("hard") //> returns 856 (returns a random number between 600 and 1200
+  }
   
 }
 
@@ -60,7 +71,20 @@ function setDelay(difficulty) {
  */
 function chooseHole(holes) {
   // TODO: Write your code here.
+  //generate a random integer from 0 to 8 and assign it to an index variable
+  let index = Math.floor(Math.random() * holes.length)
 
+  //get a random hole with the random index
+  let hole = hole[index];
+
+  //if hole === lastHole then call chooseHole(holes) again.
+  if (hole === lastHole) {
+    return chooseHole(holes)
+  } else {
+    //if hole is not the same as the lastHole then keep track of it (lastHole = hole) and return the hole
+    lastHole = hole;
+    return hole;
+  }
 }
 
 /**
