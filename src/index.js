@@ -267,7 +267,7 @@ function startTimer() {
   return timer;
 }
 
-startTimer();
+
 /**
 *
 * This is the event handler that gets called when a player
@@ -297,7 +297,7 @@ function setEventListeners(){
   return moles; // Return the mole elements after attaching event listeners
 }
 
-setEventListeners();
+
 
 /**
 *
@@ -329,12 +329,13 @@ function stopGame(){
 *
 */
 function startGame(){
-  setEventListeners()
   startTimer()
+  
   // call th setDuration()  function to determine the duration of the game 
   setDuration(10);
   // call showUp to determine the difficulty and hole to start with
   showUp();
+  setEventListeners()
   return "game started";
 }
 
