@@ -210,7 +210,7 @@ function toggleVisibility(hole){
 function updateScore() {
   // TODO: Write your code here
   // Increment the points global variable by 1 point
-  points++;
+  points = points + 1;
 
   // Update score.textContent with points.
   
@@ -329,13 +329,16 @@ function stopGame(){
 *
 */
 function startGame(){
-  startTimer()
-  
   // call th setDuration()  function to determine the duration of the game 
   setDuration(10);
+  
   // call showUp to determine the difficulty and hole to start with
   showUp();
-  setEventListeners()
+  
+  setEventListeners();
+  startTimer();
+  clearScore();
+
   return "game started";
 }
 
