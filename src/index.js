@@ -14,6 +14,29 @@ let lastHole = 0;
 let points = 0;
 let difficulty = "hard";
 
+
+// const audioHit = new Audio('C:\Users\Owner\Documents\js-dev-final-capstone-starter-whack-a-mole\assets\maxkomusic-space-heroes.mp3')
+// const song = new Audio ('C:\Users\Owner\Documents\js-dev-final-capstone-starter-whack-a-mole\assets\maxkomusic-space-heroes.mp3')
+
+// //play the audio
+// function playAudio(audioObject) {
+//   audioObject.play()
+// }
+
+// // play audio in a loop
+// function loopAudio(audioObject) {
+//   audioObject.loop = true;
+//   playAudio(audioObject);
+// }
+
+// //Pause the audio
+// function pauseAudio() {
+//   audio.pause();
+// }
+
+// function play(){
+//   playAudio(song);
+// }
 /**
  * Generates a random integer within a range.
  *
@@ -50,7 +73,7 @@ function setDelay(difficulty) {
   } else if (difficulty === "normal") {
     return 1000; //setDelay("normal") //> returns 1000
   } else if (difficulty === "hard") {
-    return  Math.floor(Math.random() * (1200 - 600 + 1)) + 600; //setDelay("hard") //> returns 856 (returns a random number between 600 and 1200
+    return  randomInteger(600, 1200); //setDelay("hard") //> returns 856 (returns a random number between 600 and 1200
   }
   
 }
@@ -75,7 +98,7 @@ function chooseHole(holes) {
   let index = Math.floor(Math.random() * holes.length)
 
   //get a random hole with the random index
-  let hole = hole[index];
+  let hole = holes[index];
 
   //if hole === lastHole then call chooseHole(holes) again.
   if (hole === lastHole) {
@@ -136,7 +159,7 @@ function gameOver() {
 */
 function showUp() {
   let delay = setDelay(difficulty); // TODO: Update so that it uses setDelay()
-  const hole = chooseHole(hole);  // TODO: Update so that it use chooseHole()
+  const hole = chooseHole(holes);  // TODO: Update so that it use chooseHole()
   return showAndHide(hole, delay);
 }
 
@@ -187,13 +210,13 @@ function toggleVisibility(hole){
 function updateScore() {
   // TODO: Write your code here
   // Increment the points global variable by 1 point
-   points++;
+  points++;
 
   // Update score.textContent with points.
-  score.textContent = points;
-
-  //return points
+  
+    score.textContent = points; // Update the scoreboard with the updated points
   return points;
+ 
 }
 
 /**
@@ -223,6 +246,10 @@ function clearScore() {
 function updateTimer() {
   // TODO: Write your code here.
   // hint: this code is provided to you in the instructions.
+  if (time > 0){
+    time -= 1;
+    timerDisplay.textContent = time;
+  }
   
   return time;
 }
@@ -235,10 +262,12 @@ function updateTimer() {
 */
 function startTimer() {
   // TODO: Write your code here
-  // timer = setInterval(updateTimer, 1000);
+  
+  timer = setInterval(updateTimer, 1000);
   return timer;
 }
 
+startTimer();
 /**
 *
 * This is the event handler that gets called when a player
@@ -262,11 +291,13 @@ function whack(event) {
 function setEventListeners(){
   // TODO: Write your code here
   // forEach mole add the whack event handler when a player clicks on the mole.
-  moles.forEach((mole) => {
-    mole.addEventListener("click", whack); //Attach the 'whack' event handler to each mole element
-  })
+  moles.forEach(mole => {
+    mole.addEventListener('click', whack);
+  });
   return moles; // Return the mole elements after attaching event listeners
 }
+
+setEventListeners();
 
 /**
 *
@@ -298,6 +329,8 @@ function stopGame(){
 *
 */
 function startGame(){
+  setEventListeners()
+  startTimer()
   // call th setDuration()  function to determine the duration of the game 
   setDuration(10);
   // call showUp to determine the difficulty and hole to start with
