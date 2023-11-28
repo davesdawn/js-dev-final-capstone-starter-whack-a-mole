@@ -12,7 +12,7 @@ let time = 0;
 let timer;
 let lastHole = 0;
 let points = 0;
-let difficulty = "hard";
+let difficulty = "easy";
 
 
 // const audioHit = new Audio('C:\Users\Owner\Documents\js-dev-final-capstone-starter-whack-a-mole\assets\maxkomusic-space-heroes.mp3')
@@ -95,7 +95,7 @@ function setDelay(difficulty) {
 function chooseHole(holes) {
   // TODO: Write your code here.
   //generate a random integer from 0 to 8 and assign it to an index variable
-  let index = Math.floor(Math.random() * holes.length)
+  let index = randomInteger(0, 8);
 
   //get a random hole with the random index
   let hole = holes[index];
@@ -135,16 +135,15 @@ function gameOver() {
   
   if (time > 0) {
     // Call showUp() to continue the game with a different delay and hole
-    timeoutID = showUp();
+    let timeoutID = showUp();
 
     // return the timeoutId if the game continues
     return timeoutID;
   } else {
     // call stopGame if there is no more time
-    stopGame();
+    let gameStopped = stopGame();
 
-    // return "game stopped" when the game is over
-    return "game stopped";
+    return gameStopped;
   }
 }
 
@@ -210,7 +209,7 @@ function toggleVisibility(hole){
 function updateScore() {
   // TODO: Write your code here
   // Increment the points global variable by 1 point
-  points = points + 1;
+  points++;
 
   // Update score.textContent with points.
   
@@ -334,11 +333,10 @@ function startGame(){
   
   // call showUp to determine the difficulty and hole to start with
   showUp();
-  
-  setEventListeners();
   startTimer();
+  setEventListeners();
   clearScore();
-
+  
   return "game started";
 }
 
