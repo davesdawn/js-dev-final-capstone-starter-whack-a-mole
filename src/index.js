@@ -13,7 +13,7 @@ let timer;
 let lastHole = 0;
 let points = 0;
 let difficulty = "easy";
-
+let lastMoleHit;
 
 // const audioHit = new Audio('C:\Users\Owner\Documents\js-dev-final-capstone-starter-whack-a-mole\assets\maxkomusic-space-heroes.mp3')
 // const song = new Audio ('C:\Users\Owner\Documents\js-dev-final-capstone-starter-whack-a-mole\assets\maxkomusic-space-heroes.mp3')
@@ -277,8 +277,13 @@ function startTimer() {
 */
 function whack(event) {
   // TODO: Write your code here.
+   // TODO: Write your code here.
+   console.log("whack!")
+   if(event.target !== lastMoleHit) {
+     lastMoleHit = event.target;
   // call updateScore()
   updateScore();
+   }
   return points;
 }
 
